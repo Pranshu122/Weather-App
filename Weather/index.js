@@ -1,7 +1,6 @@
 const userTab = document.querySelector("[data-userWeather]");
 const searchTab = document.querySelector("[data-searchWeather]");
 const userContainer = document.querySelector(".weather-container");
-
 const grantAccessContainer = document.querySelector(".grant-location-container");
 const searchForm = document.querySelector("[data-searchForm]");
 const loadingScreen = document.querySelector(".loading-container");
@@ -35,7 +34,6 @@ function switchTab(newTab) {
     }
 }
 
-
 userTab.addEventListener("click", () => {
     switchTab(userTab);
 });
@@ -58,13 +56,11 @@ async function fetchUserWeatherInfo(coordinates) {
     const { lat, lon } = coordinates;
     grantAccessContainer.classList.remove("active");
     loadingScreen.classList.add("active");
-
     try {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
         );
         const data = await response.json();
-
         loadingScreen.classList.remove("active");
         userInfoContainer.classList.add("active");
         renderWeatherInfo(data);
@@ -83,7 +79,6 @@ function renderWeatherInfo(weatherInfo) {
     const windspeed = document.querySelector("[data-windspeed]");
     const humidity = document.querySelector("[data-humidity]");
     const cloudiness = document.querySelector("[data-cloudiness]");
-
     const tempInCelsius = weatherInfo?.main?.temp - 273.15;
 
     cityName.innerText = weatherInfo?.name;
